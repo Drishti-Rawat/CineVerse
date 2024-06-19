@@ -31,15 +31,13 @@ export default function Home() {
   
 
       console.log(nowPlaying)
-
+      
   return (
-   <main className=" bg-[#050505] relative">
+   <main className=" bg-[#090808fe] relative">
     <div>
     <Carousel/>
     </div>
-    <div className="flex flex-col  py-7 space-y-5 ">
-
-    
+    <div className="flex flex-col   py-7 space-y-5 ">
 
     <MovieContainer movies={nowPlaying} title="Now Playing"/>
     <MovieContainer movies={TopRated} title="Top Rated"/>

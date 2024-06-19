@@ -12,11 +12,11 @@ const MovieContainer = ({movies,title}) => {
   
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
   const onInit = useCallback((embla) => {
     setPrevBtnEnabled(embla.canScrollPrev());
-    setNextBtnEnabled(embla.canScrollNext());
+    setNextBtnEnabled(true);
   }, []);
 
   const onSelect = useCallback((embla) => {
@@ -41,10 +41,10 @@ const MovieContainer = ({movies,title}) => {
   
 
   return (
-    <div className='flex flex-col text-white pb-4'>
+    <div className='flex flex-col -mt-4 sm:-mt-20 z-30 text-white  overflow-x-hidden '>
 
-      <div className='mx-10 px-2 flex justify-between items-center py-1 '>
-        <h2 className='text-sm tracking-wider py-1 font-semibold  ' >{title}</h2>
+      <div className='mx-10 px-2 flex justify-between items-center  '>
+        <h2 className='text-lg underline underline-offset-8 decoration-rose-700 tracking-wider py-1 font-semibold  ' >{title}</h2>
 
         <Link href="/ViewMore">
         {/* <ArrowRight/> */} view more
@@ -53,15 +53,15 @@ const MovieContainer = ({movies,title}) => {
 
 
     
-<div ref={emblaRef} className=' relative overflow-hidden'>
-      <div className='flex space-x-4 flex-nowrap px-5 lg:px-10 py-5 '>
+<div ref={emblaRef} className=' relative py-20 '>
+      <div className='flex  space-x-6 flex-nowrap px-5 lg:px-10 '>
     
       
         {movies && movies.length > 0 ? (
           movies.map((movie) => (
-            <div className='w-80 mr-4'>
-            <MovieCard key={movie.id} poster_path={movie?.poster_path} />
-            </div>
+           
+            <MovieCard key={movie.id} movie={movie} />
+            
           ))
         ) : (
           <div>
@@ -71,20 +71,28 @@ const MovieContainer = ({movies,title}) => {
         
       </div>
 
-      <button
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 rounded-full p-2"
-        onClick={handlePrevClick}
-        disabled={!prevBtnEnabled}
+      <div className='absolute top-[179.5px] left-0 flex items-center  transform -translate-y-1/2 bg-[#00000098] h-[70%] z-40  px-7  '
+      onClick={handlePrevClick}
+      disabled={!prevBtnEnabled}
       >
-        <ArrowLeft className="w-4 h-4 text-white" />
-      </button>
       <button
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 rounded-full p-2"
-        onClick={handleNextClick}
-        disabled={!nextBtnEnabled}
+        className="  "
+        
       >
-        <ArrowRight className="w-4 h-4 text-white" />
+        <ArrowLeft className="w-6 h-7 text-white" />
       </button>
+      </div>
+
+      <div className='bg-[#00000098] absolute top-[179.5px] flex items-center transform -translate-y-1/2 h-[70%]  right-0 z-40 px-7   '
+          onClick={handleNextClick}
+          disabled={!nextBtnEnabled}
+      >
+      <button
+        className="  "
+      >
+        <ArrowRight className="w-6 h-7 text-white" />
+      </button>
+      </div>
       </div>
 
 
