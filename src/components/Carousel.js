@@ -25,7 +25,7 @@ const Carousel = () => {
   
     const [emblaRef] = useEmblaCarousel({ loop: false }, [AutoPlay()]);
     return (
-<div className="overflow-hidden cursor-pointer relative" ref={emblaRef}>
+<div className="overflow-hidden cursor-pointer relative " ref={emblaRef}>
       <div className="flex">
         {DiscoveredMovie.map((movie) => (
           <div key={movie?.id} className="flex-grow-0 flex-shrink-0 basis-full  min-w-0 relative">

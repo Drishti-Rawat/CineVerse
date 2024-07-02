@@ -9,27 +9,32 @@ const SearchBox = () => {
     const router = useRouter()
   
 
-  useEffect(()=>{
-   const interval = setInterval(()=>{
-    if (searchParam.trim() !== "") {
-        router.push(`/search/${searchParam}`);
-      }
-   },500)
-   return () => clearTimeout(interval);
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        if (searchParam.trim() !== "") {
+          router.push(`/search/${searchParam}`);
+        } else {
+          router.push("/");
+        }
+      }, 500); // 500ms delay
+  
+      return () => clearTimeout(handler);
+    }, [searchParam, router]);
 
-  },[searchParam,router])
+ 
 
   return (
-    <form  className="flex items-center  px-2 focus-within::outline focus-within::outline-1 focus-within::outline-red-500  ">
+    <form  className="flex items-center ring-1 ring-white bg-[#000000ad]     px-2 focus-within::outline focus-within::outline-1 focus-within::outline-red-500  ">
+      <Search height={25} width={25} />
       <input
         type="text"
         placeholder="Title,Shows,Movies"
-        className=" px-4  bg-transparent outline-none placeholder:text-sm  text-white py-1.5"
+        className=" px-4  bg-transparent outline-none placeholder:text-sm  text-white py-2"
         value={searchParam}
         onChange={(e)=>setSearchparam(e.target.value)}
 
       />
-      <Search />
+      
     </form>
   );
 };
